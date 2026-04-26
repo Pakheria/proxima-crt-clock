@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "proximalinkpk@gmail.com",
+                "Name": "ProximaLink"
+            }
+        ],
+        "Category": "",
+        "Description": "Live clock wallpaper with ProximaLink branding",
+        "Id": "com.proximalink.clockwallpaper",
+        "Name": "ProximaLink Live Clock",
+        "Version": "1.0",
+        "License": "MIT",
+        "Website": ""
+    }
+}

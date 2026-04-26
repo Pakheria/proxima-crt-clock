@@ -1,0 +1,7 @@
+# KDE Plasma temporary files
+*.qmlc
+.directory
+
+# OS files
+.DS_Store
+Thumbs.db
