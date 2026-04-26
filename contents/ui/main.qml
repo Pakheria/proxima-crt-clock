@@ -57,7 +57,7 @@ WallpaperItem {
                 // Logo
                 Image {
                     Layout.alignment: Qt.AlignHCenter
-                    source: "/home/proxima/Desktop/ProximaLinkNew/SVG/NewLogo/ProximaLink.svg"
+                    source: "../assets/ProximaLink.svg"
                     Layout.preferredWidth:  bg.width  * 0.28
                     Layout.preferredHeight: bg.height * 0.10
                     fillMode: Image.PreserveAspectFit
