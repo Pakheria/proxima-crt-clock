@@ -3,7 +3,7 @@
     "KPlugin": {
         "Name": "Retro CRT Clock",
         "Description": "A live 7-segment digital clock with authentic CRT-style visual effects.",
-        "Id": "com.retro.crtclock",
+        "Id": "com.proximalink.clockwallpaper",
         "Version": "1.1",
         "Author": "Open Source",
         "License": "MIT",
