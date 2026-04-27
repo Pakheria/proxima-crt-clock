@@ -8,17 +8,20 @@ A professional, live KDE Plasma wallpaper featuring a stylized 7-segment digital
 
 ## ✨ Features
 
-- **7-Segment Display**: Clean digital clock rendered via native Canvas.
-- **CRT Aesthetics**: Includes scanlines, vignette, and subtle screen flicker.
+- **7-Segment Display**: Clean digital clock rendered via native QML Canvas.
+- **CRT Aesthetics**: Authentic scanlines, vignette overlay, and subtle screen flicker.
 - **Dynamic Quotes**: Fetches fresh inspiration every hour from the ZenQuotes API.
 - **Offline Support**: Automatically falls back to a customizable internal quote list if internet is unavailable.
-- **Fully Customizable**: Change colors, logos, and quotes directly in the source.
+- **Fully Customizable**: Easily modify colors, logos, and quote lists in a single file.
 
 ## 🚀 Installation
 
 1. **Deploy to KDE**:
    ```bash
+   # Create the directory
    mkdir -p ~/.local/share/plasma/wallpapers/com.retro.crtclock
+   
+   # Copy the project files
    cp -r contents/ metadata.json ~/.local/share/plasma/wallpapers/com.retro.crtclock/
    ```
 
@@ -26,31 +29,29 @@ A professional, live KDE Plasma wallpaper featuring a stylized 7-segment digital
    - Right-click on your Desktop -> **Configure Desktop and Wallpaper**.
    - Select **Retro CRT Clock** from the Wallpaper Type dropdown.
 
+*Note: If the wallpaper does not appear, run `kbuildsycoca6 --noincremental` to refresh the KDE plugin cache.*
+
 ## 🛠 Customization Guide
 
-All customization is handled in `contents/ui/main.qml`.
+All visual settings are consolidated at the top of `contents/ui/main.qml`.
 
-### 1. Change Colors
-Locate the `THEME CUSTOMIZATION` section at the top of `main.qml`. Update the hex codes:
-- `backgroundColor`: Main screen color (default: `#050a0e`).
-- `digitColor`: The color of the clock segments (default: `#FFB900`).
-- `accentColor`: Color for the date and dividers (default: `#0046FF`).
+### 1. Theme Colors
+Update these hex codes to match your setup:
+- `backgroundColor`: Main screen color.
+- `digitColor`: The color of the clock segments.
+- `accentColor`: Color for the date and divider lines.
 
-### 2. Replace Logo
-1. Save your logo as `logo.svg` (or `.png`) in `contents/assets/`.
-2. The wallpaper will automatically detect and display it if present.
-3. If you use a different filename, update `logoPath` in `main.qml`.
+### 2. Branding / Logo
+To add your own logo:
+1. Place your SVG or PNG file in `contents/assets/`.
+2. Name it `logo.svg` or update the `logoPath` property in `main.qml`.
+3. The wallpaper will automatically hide the logo area if no file is found.
 
-### 3. Edit Offline Quotes
-Add or remove entries in the `fallbackQuotes` array. This is what shows when you are offline:
-```qml
-readonly property var fallbackQuotes: [
-    { text: "Your new quote here", author: "Author Name" },
-]
-```
+### 3. Custom Quotes
+You can add your own favorite quotes to the `fallbackQuotes` array in `main.qml`. These will be used whenever the API is unreachable.
 
 ## 🌐 API Notice
-This wallpaper uses the **ZenQuotes API** (Free Tier) for dynamic content. No API key is required for basic usage.
+This project uses the **ZenQuotes API** (Free Tier) to provide dynamic content. No API key is required.
 
 ---
 *Created with ❤️ for the Linux Community.*
