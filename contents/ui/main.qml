@@ -9,34 +9,50 @@ WallpaperItem {
     property int  currentHour:  new Date().getHours()
     property real flicker:      1.0
 
-    readonly property var quotes: [
-        { text: "The secret of getting ahead is getting started.",                                      author: "Mark Twain" },
-        { text: "It does not matter how slowly you go as long as you do not stop.",                     author: "Confucius" },
-        { text: "Everything you have ever wanted is on the other side of fear.",                        author: "George Addair" },
-        { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
-        { text: "Hardships often prepare ordinary people for an extraordinary destiny.",                 author: "C.S. Lewis" },
-        { text: "Believe you can and you are halfway there.",                                            author: "Theodore Roosevelt" },
-        { text: "Your time is limited, so do not waste it living someone else's life.",                  author: "Steve Jobs" },
-        { text: "The only way to do great work is to love what you do.",                                author: "Steve Jobs" },
-        { text: "In the middle of every difficulty lies opportunity.",                                   author: "Albert Einstein" },
-        { text: "It always seems impossible until it is done.",                                         author: "Nelson Mandela" },
-        { text: "Do not watch the clock; do what it does. Keep going.",                                 author: "Sam Levenson" },
-        { text: "The future belongs to those who believe in the beauty of their dreams.",                author: "Eleanor Roosevelt" },
-        { text: "You miss 100% of the shots you do not take.",                                          author: "Wayne Gretzky" },
-        { text: "Whether you think you can or you think you cannot, you are right.",                    author: "Henry Ford" },
-        { text: "I have not failed. I have just found 10,000 ways that will not work.",                 author: "Thomas Edison" },
-        { text: "A person who never made a mistake never tried anything new.",                          author: "Albert Einstein" },
-        { text: "The best time to plant a tree was 20 years ago. The second best time is now.",         author: "Chinese Proverb" },
-        { text: "An unexamined life is not worth living.",                                              author: "Socrates" },
-        { text: "Spread love everywhere you go. Let no one ever come without leaving happier.",         author: "Mother Teresa" },
-        { text: "When you reach the end of your rope, tie a knot in it and hang on.",                   author: "Franklin D. Roosevelt" },
-        { text: "You will face many defeats in life, but never let yourself be defeated.",              author: "Maya Angelou" },
-        { text: "Do not go where the path may lead; go where there is no path and leave a trail.",      author: "Ralph Waldo Emerson" },
-        { text: "The greatest glory in living lies not in never falling, but in rising every time we fall.", author: "Nelson Mandela" },
-        { text: "In the end, it is not the years in your life that count. It is the life in your years.", author: "Abraham Lincoln" }
+    // Properties for Dynamic Quotes
+    property string currentQuoteText: "Fetching inspiration..."
+    property string currentQuoteAuthor: "Wait for it"
+
+    // Hardcoded Fallback Quotes
+    readonly property var fallbackQuotes: [
+        { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+        { text: "Your time is limited, so do not waste it living someone else's life.", author: "Steve Jobs" }
     ]
 
-    function currentQuote() { return quotes[currentHour % quotes.length] }
+    function updateQuote() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        // Using ZenQuotes API format: [{ q: "quote", a: "author", ... }]
+                        if (response && response.length > 0) {
+                            root.currentQuoteText = response[0].q;
+                            root.currentQuoteAuthor = response[0].a;
+                        }
+                    } catch (e) {
+                        loadFallbackQuote();
+                    }
+                } else {
+                    loadFallbackQuote();
+                }
+            }
+        }
+        // Fetch a random quote from ZenQuotes (CORS-friendly for most local desktop environments)
+        xhr.open("GET", "https://zenquotes.io/api/random");
+        xhr.send();
+    }
+
+    function loadFallbackQuote() {
+        var q = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+        root.currentQuoteText = q.text;
+        root.currentQuoteAuthor = q.author;
+    }
+
+    Component.onCompleted: {
+        updateQuote();
+    }
 
     // ── Background ──────────────────────────────────────────────────────────
     Rectangle {
@@ -255,7 +271,7 @@ WallpaperItem {
                         horizontalAlignment: Text.AlignHCenter
                         wrapMode:           Text.WordWrap
                         opacity:            0.78
-                        text: '"' + root.currentQuote().text + '"'
+                        text: '"' + root.currentQuoteText + '"'
                     }
 
                     Text {
@@ -266,7 +282,7 @@ WallpaperItem {
                         font.bold:      true
                         font.family:    "Courier New"
                         opacity:        0.88
-                        text: "-- " + root.currentQuote().author
+                        text: "-- " + root.currentQuoteAuthor
                     }
                 }
             }
@@ -313,8 +329,7 @@ WallpaperItem {
             var h = now.getHours()
             if (h !== root.currentHour) {
                 root.currentHour    = h
-                quoteText.text      = '"' + root.currentQuote().text + '"'
-                quoteAuthor.text    = "-- " + root.currentQuote().author
+                root.updateQuote() // Fetch new live quote every hour
             }
             if (Math.random() > 0.91) {
                 root.flicker = 0.96
