@@ -1,29 +1,57 @@
 # ProximaLink CRT Clock Wallpaper
 
-A live KDE Plasma wallpaper featuring a 7-segment digital clock with CRT-style scanlines, vignette, and occasional flicker effects. Custom branded for ProximaLink.
+A professional, live KDE Plasma wallpaper featuring a stylized 7-segment digital clock with authentic CRT-style visual effects. Custom branded for **ProximaLink**.
 
-## Features
-- **7-Segment Digital Clock**: Dynamic rendering on Canvas.
-- **CRT Effects**: Authentic scanlines, vignette, and subtle screen flicker.
-- **Quotes**: Rotates through a collection of motivational quotes hourly.
-- **Custom Branding**: Integrated ProximaLink logo and color scheme.
-- **Interactive**: Responds to time changes and renders smoothly on secondary monitors.
+![KDE Plasma](https://img.shields.io/badge/Platform-KDE%20Plasma%206-blue?logo=kde&logoColor=white)
+![Qt](https://img.shields.io/badge/Tech-QtQuick%20/%20QML-green?logo=qt&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## Installation
+## ✨ Features
 
-### Manual Installation
-1. Copy the `com.proximalink.clockwallpaper` folder (or the contents of this repo) to your local plasma wallpaper directory:
-   ```bash
-   mkdir -p ~/.local/share/plasma/wallpapers/com.proximalink.clockwallpaper
-   cp -r ./* ~/.local/share/plasma/wallpapers/com.proximalink.clockwallpaper/
-   ```
-2. Right-click your desktop -> **Configure Desktop and Wallpaper**.
-3. Select **ProximaLink Live Clock** from the Wallpaper Type dropdown.
+- **7-Segment Display**: Clean digital clock rendered via HTML5 Canvas in QML.
+- **CRT Aesthetics**: 
+  - **Scanlines**: Interlaced overlay for that classic monitor feel.
+  - **Vignette**: Subtle edge darkening to simulate tube curvature.
+  - **Screen Flicker**: Occasional subtle brightness shifts for realism.
+- **Hourly Quotes**: Automatically rotates through a collection of motivational tech and engineering quotes every hour.
+- **ProximaLink Branding**: Integrated vector logo and consistent corporate color palette.
+- **High Performance**: Optimized QML rendering with minimal CPU overhead.
 
-## Requirements
-- KDE Plasma 6.x
-- QtQuick 6.x
-- `org.kde.plasma.plasmoid`
+## 🚀 Installation
 
-## Credits
-Created by Claude for ProximaLink.
+### 1. Manual Deployment
+To install the wallpaper for the current user, run:
+
+```bash
+mkdir -p ~/.local/share/plasma/wallpapers/com.proximalink.clockwallpaper
+cp -r contents/ metadata.json ~/.local/share/plasma/wallpapers/com.proximalink.clockwallpaper/
+```
+
+### 2. Activation
+1. Right-click on your Desktop.
+2. Select **Configure Desktop and Wallpaper**.
+3. In the **Wallpaper Type** dropdown, select **ProximaLink Live Clock**.
+4. Click **Apply**.
+
+## 🛠 Project Structure
+
+```text
+proxima-crt-clock/
+├── contents/
+│   ├── assets/       # Branding and vector assets
+│   └── ui/           # QML Source code (main.qml)
+├── metadata.json     # KDE Plugin metadata
+└── README.md         # You are here
+```
+
+## ⚙️ Customization
+The main logic is contained in `contents/ui/main.qml`. You can adjust:
+- **Flicker Intensity**: Tweak the `opacity` animation in the flicker layer.
+- **Color Scheme**: Modify the `glowColor` and `segmentColor` properties.
+- **Scanline Density**: Change the `repeating-linear-gradient` values in the scanline overlay.
+
+## 📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+*Created with ❤️ by Gemini CLI for ProximaLink.*
