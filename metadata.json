@@ -1,14 +1,18 @@
 {
     "KPackageStructure": "Plasma/Wallpaper",
     "KPlugin": {
-        "Name": "Retro CRT Clock",
-        "Description": "A live 7-segment digital clock with authentic CRT-style visual effects.",
+        "Authors": [
+            {
+                "Email": "proximalinkpk@gmail.com",
+                "Name": "ProximaLink"
+            }
+        ],
+        "Category": "",
+        "Description": "Live clock wallpaper with ProximaLink branding",
         "Id": "com.proximalink.clockwallpaper",
-        "Version": "1.1",
-        "Author": "Open Source",
+        "Name": "ProximaLink Live Clock",
+        "Version": "1.0",
         "License": "MIT",
-        "ServiceTypes": [
-            "Plasma/Wallpaper"
-        ]
+        "Website": ""
     }
 }
