@@ -1,6 +1,6 @@
-# Retro CRT Clock Wallpaper
+# Proxima CRT Clock Wallpaper
 
-A professional, live KDE Plasma wallpaper featuring a stylized 7-segment digital clock with authentic CRT-style visual effects. Optimized for high performance and low CPU overhead.
+A professional, live KDE Plasma wallpaper featuring a stylized 7-segment digital clock with authentic CRT-style visual effects. Optimized for high performance, multi-resolution support, and daily historical context.
 
 ![KDE Plasma](https://img.shields.io/badge/Platform-KDE%20Plasma%206-blue?logo=kde&logoColor=white)
 ![Qt](https://img.shields.io/badge/Tech-QtQuick%20/%20QML-green?logo=qt&logoColor=white)
@@ -8,50 +8,45 @@ A professional, live KDE Plasma wallpaper featuring a stylized 7-segment digital
 
 ## ✨ Features
 
-- **7-Segment Display**: Clean digital clock rendered via native QML Canvas.
-- **CRT Aesthetics**: Authentic scanlines, vignette overlay, and subtle screen flicker.
-- **Dynamic Quotes**: Fetches fresh inspiration every hour from the ZenQuotes API.
-- **Offline Support**: Automatically falls back to a customizable internal quote list if internet is unavailable.
-- **Fully Customizable**: Easily modify colors, logos, and quote lists in a single file.
+- **7-Segment Display**: Re-engineered digital clock with bold active segments and dim background "8" shadows for authentic hardware feel.
+- **"On This Day" Perimeter**: Integrated Wikipedia API to frame your desktop with historical facts.
+- **Intelligent Distribution**: A custom algorithm sorts facts by length, placing long-form history in wide middle cards and short snippets in corner slots.
+- **Auto-Scaling Typography**: Support for `fontSizeMode: Text.Fit` ensures that even the longest historical events are fully visible without clipping.
+- **Resolution-Independent**: Fully proportional layout that scales elegantly from **720p** to **2k** displays.
+- **Dynamic Quotes**: Fetches fresh inspiration every **5 minutes** from the ZenQuotes API.
+- **CRT Aesthetics**: High-fidelity scanlines, radial vignette, and subtle screen flicker.
 
 ## 🚀 Installation
 
 1. **Deploy to KDE**:
    ```bash
    # Create the directory
-   mkdir -p ~/.local/share/plasma/wallpapers/com.retro.crtclock
+   mkdir -p ~/.local/share/plasma/wallpapers/com.proximalink.clockwallpaper
    
    # Copy the project files
-   cp -r contents/ metadata.json ~/.local/share/plasma/wallpapers/com.retro.crtclock/
+   cp -r contents/ metadata.json ~/.local/share/plasma/wallpapers/com.proximalink.clockwallpaper/
    ```
 
 2. **Activation**:
    - Right-click on your Desktop -> **Configure Desktop and Wallpaper**.
-   - Select **Retro CRT Clock** from the Wallpaper Type dropdown.
+   - Select **CRT Clock Wallpaper** from the Wallpaper Type dropdown.
 
 *Note: If the wallpaper does not appear, run `kbuildsycoca6 --noincremental` to refresh the KDE plugin cache.*
 
-## 🛠 Customization Guide
+## 🛠 Technical Details
 
-All visual settings are consolidated at the top of `contents/ui/main.qml`.
+### 1. Adaptive Layout
+The layout constants are calculated based on the screen resolution:
+- `sideWidth`: 18% of screen width.
+- `rowHeight`: 15% of screen height.
+- `margins`: Dynamically adjusted to clear taskbars and system panels.
 
-### 1. Theme Colors
-Update these hex codes to match your setup:
-- `backgroundColor`: Main screen color.
-- `digitColor`: The color of the clock segments.
-- `accentColor`: Color for the date and divider lines.
+### 2. Intelligent Data Mapping
+Facts are fetched hourly and distributed across 14 perimeter slots (4 Top, 4 Bottom, 3 Left, 3 Right) based on text character counts to optimize screen real estate.
 
-### 2. Branding / Logo
-To add your own logo:
-1. Place your SVG or PNG file in `contents/assets/`.
-2. Name it `logo.svg` or update the `logoPath` property in `main.qml`.
-3. The wallpaper will automatically hide the logo area if no file is found.
-
-### 3. Custom Quotes
-You can add your own favorite quotes to the `fallbackQuotes` array in `main.qml`. These will be used whenever the API is unreachable.
-
-## 🌐 API Notice
-This project uses the **ZenQuotes API** (Free Tier) to provide dynamic content. No API key is required.
+### 3. API Sources
+- **Quotes**: [ZenQuotes API](https://zenquotes.io/)
+- **History**: [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/)
 
 ---
-*Created with ❤️ for the Linux Community.*
+*Created with ❤️ by ProximaCore for the Linux Community.*
